@@ -68,7 +68,6 @@ end
 
 
 gem 'devise'
-
-
+gem 'whenever', require: false
 
 
