@@ -69,5 +69,7 @@ end
 
 gem 'devise'
 gem 'whenever', require: false
-
+gem 'rspec-rails'
+gem 'simplecov', require: false
+gem 'rails-controller-testing'
 
