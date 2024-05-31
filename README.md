@@ -73,7 +73,7 @@ rails db:migrate
 ```bash
 rails db:seed
 ```
-to feed the data for intial login can use username:- amaha@example.com, password: amaha7777
+for initial login can use credentials username:- amaha@example.com, password: amaha7777
 
 - Start the Rails server and begin :
 
@@ -97,6 +97,15 @@ bundle exec rspec
 
 
 #### you are ready to go! 
+
+
+## Login Page
+
+![Login Page](app/assets/images/login_page.png)
+
+## Homepage
+
+![Homepage](app/assets/images/homepage.png)
 
 
 ### Guide to Rspec installation( already added in this project)
