@@ -1,1 +1,814 @@
   [1m[36mActiveRecord::SchemaMigration Load (2.7ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (2.1ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.8ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.2ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[35m (57.3ms)[0m  [1m[35mDROP DATABASE IF EXISTS "task_manager_test"[0m
+  [1m[35m (113.0ms)[0m  [1m[35mCREATE DATABASE "task_manager_test" ENCODING = 'unicode'[0m
+  [1m[35mSQL (1.0ms)[0m  [1m[35mCREATE EXTENSION IF NOT EXISTS "plpgsql"[0m
+  [1m[35m (0.1ms)[0m  [1m[35mDROP TABLE IF EXISTS "tasks" CASCADE[0m
+  [1m[35m (14.5ms)[0m  [1m[35mCREATE TABLE "tasks" ("id" bigserial primary key, "title" character varying, "description" text, "state" character varying, "deadline" timestamp(6), "user_id" bigint NOT NULL, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.6ms)[0m  [1m[35mCREATE INDEX "index_tasks_on_user_id" ON "tasks" ("user_id")[0m
+  [1m[35m (0.2ms)[0m  [1m[35mDROP TABLE IF EXISTS "users" CASCADE[0m
+  [1m[35m (1.7ms)[0m  [1m[35mCREATE TABLE "users" ("id" bigserial primary key, "email" character varying DEFAULT '' NOT NULL, "encrypted_password" character varying DEFAULT '' NOT NULL, "reset_password_token" character varying, "reset_password_sent_at" timestamp(6), "remember_created_at" timestamp(6), "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[35m (0.7ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_email" ON "users" ("email")[0m
+  [1m[35m (0.8ms)[0m  [1m[35mCREATE UNIQUE INDEX "index_users_on_reset_password_token" ON "users" ("reset_password_token")[0m
+  [1m[35m (1.3ms)[0m  [1m[35mALTER TABLE "tasks" ADD CONSTRAINT "fk_rails_4d2a9e4d7e"
+FOREIGN KEY ("user_id")
+  REFERENCES "users" ("id")
+[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "schema_migrations" ("version" character varying NOT NULL PRIMARY KEY)[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.3ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[35m (0.3ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES (20240531065600)[0m
+  [1m[35m (0.2ms)[0m  [1m[32mINSERT INTO "schema_migrations" (version) VALUES
+(20240531065540);[0m
+  [1m[35m (1.3ms)[0m  [1m[35mCREATE TABLE "ar_internal_metadata" ("key" character varying NOT NULL PRIMARY KEY, "value" character varying, "created_at" timestamp(6) NOT NULL, "updated_at" timestamp(6) NOT NULL)[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.4ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.3ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('environment', 'test', '2024-05-31 17:06:19.371021', '2024-05-31 17:06:19.371025') RETURNING "key"[0m
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "environment"]]
+  [1m[36mActiveRecord::InternalMetadata Load (0.2ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::InternalMetadata Create (0.2ms)[0m  [1m[32mINSERT INTO "ar_internal_metadata" ("key", "value", "created_at", "updated_at") VALUES ('schema_sha1', '9853185c464ddeaed46b782166d0831c366fc923', '2024-05-31 17:06:19.373156', '2024-05-31 17:06:19.373158') RETURNING "key"[0m
+  [1m[36mActiveRecord::SchemaMigration Load (0.4ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (8.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.474374"], ["updated_at", "2024-05-31 17:06:19.474374"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.520869"], ["updated_at", "2024-05-31 17:06:19.520869"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.3ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:06:19.523760"], ["user_id", 2], ["created_at", "2024-05-31 17:06:19.536706"], ["updated_at", "2024-05-31 17:06:19.536706"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.543153"], ["updated_at", "2024-05-31 17:06:19.543153"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.547902"], ["updated_at", "2024-05-31 17:06:19.547902"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:06:19.548763"], ["user_id", 4], ["created_at", "2024-05-31 17:06:19.549025"], ["updated_at", "2024-05-31 17:06:19.549025"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.554071"], ["updated_at", "2024-05-31 17:06:19.554071"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.559486"], ["updated_at", "2024-05-31 17:06:19.559486"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.564266"], ["updated_at", "2024-05-31 17:06:19.564266"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.568943"], ["updated_at", "2024-05-31 17:06:19.568943"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.574228"], ["updated_at", "2024-05-31 17:06:19.574228"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:06:19.575120"], ["user_id", 9], ["created_at", "2024-05-31 17:06:19.575378"], ["updated_at", "2024-05-31 17:06:19.575378"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.579796"], ["updated_at", "2024-05-31 17:06:19.579796"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-06-01 16:06:19.580638"], ["user_id", 10], ["created_at", "2024-05-31 17:06:19.581036"], ["updated_at", "2024-05-31 17:06:19.581036"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (1.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:06:19.590710' AND deadline < '2024-06-01 18:06:19.590711')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 91c132f4-e9b4-4aab-9f3c-3589ea50e3e1) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x00000001343566e8 @uri=#<URI::GID gid://taskapp/Task/4>>, "1 Day"]}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActionMailer::MailDeliveryJob] [91c132f4-e9b4-4aab-9f3c-3589ea50e3e1]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 4], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [91c132f4-e9b4-4aab-9f3c-3589ea50e3e1] Error performing ActionMailer::MailDeliveryJob (Job ID: 91c132f4-e9b4-4aab-9f3c-3589ea50e3e1) from Async(default) in 2.23ms: ActiveJob::DeserializationError (Error while trying to deserialize arguments: Couldn't find Task with 'id'=4):
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:416:in `raise_record_not_found_exception!'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:522:in `find_one'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:499:in `find_with_ids'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:92:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/querying.rb:23:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/core.rb:246:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:162:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `block in locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `block in unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:929:in `_scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:467:in `scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/scoping/default.rb:51:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:31:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:145:in `deserialize_global_id'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:129:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `block in deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `block in deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `transform_values'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:133:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `block in deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:210:in `deserialize_arguments'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:200:in `deserialize_arguments_if_needed'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:50:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:06:19.599196"], ["updated_at", "2024-05-31 17:06:19.599196"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 18:05:19.600139"], ["user_id", 11], ["created_at", "2024-05-31 17:06:19.600450"], ["updated_at", "2024-05-31 17:06:19.600450"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:06:19.601638' AND deadline < '2024-05-31 19:06:19.601639')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000144c754f8 @uri=#<URI::GID gid://taskapp/Task/5>>, "1 Hour"]}
+[ActiveJob] [ActionMailer::MailDeliveryJob] [ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 5], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc] Performing ActionMailer::MailDeliveryJob (Job ID: ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc) from Async(default) enqueued at 2024-05-31T17:06:19.602560000Z with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x0000000144c71fb0 @uri=#<URI::GID gid://taskapp/Task/5>>, "1 Hour"]}
+  [1m[36mTRANSACTION (11.4ms)[0m  [1m[31mROLLBACK[0m
+[ActiveJob] [ActionMailer::MailDeliveryJob] [ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc]   [1m[36mUser Load (0.4ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 11], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc] TaskMailer#deadline_alert: processed outbound mail in 91.0ms
+[ActiveJob] [ActionMailer::MailDeliveryJob] [ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc] Error performing ActionMailer::MailDeliveryJob (Job ID: ab4e008b-4fb1-48e1-9cc3-af1ecfc2eadc) from Async(default) in 111.99ms: NoMethodError (undefined method `email' for nil):
+/Users/yuvraj/Desktop/TaskManagement/app/mailers/task_mailer.rb:5:in `deadline_alert'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/base.rb:224:in `process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actiontext-7.1.3.3/lib/action_text/rendering.rb:23:in `with_renderer'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actiontext-7.1.3.3/lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/callbacks.rb:258:in `process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/base.rb:160:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:29:in `block in process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:21:in `handle_exceptions'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:28:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionview-7.1.3.3/lib/action_view/rendering.rb:40:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/base.rb:658:in `block in process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/base.rb:657:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:136:in `block in processed_mailer'
+<internal:kernel>:90:in `tap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:135:in `processed_mailer'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:124:in `deliver_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/mail_delivery_job.rb:28:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:69:in `block in _perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/i18n-1.14.5/lib/i18n.rb:351:in `with_locale'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/translation.rb:9:in `block (2 levels) in <module:Translation>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/core_ext/time/zones.rb:65:in `use_zone'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/timezones.rb:9:in `block (2 levels) in <module:Timezones>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:68:in `_perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:32:in `_perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:52:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (1.0ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.8ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.564829"], ["updated_at", "2024-05-31 17:16:34.564829"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.586414"], ["updated_at", "2024-05-31 17:16:34.586414"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:16:34.587431"], ["user_id", 13], ["created_at", "2024-05-31 17:16:34.601860"], ["updated_at", "2024-05-31 17:16:34.601860"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.607897"], ["updated_at", "2024-05-31 17:16:34.607897"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.612418"], ["updated_at", "2024-05-31 17:16:34.612418"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:16:34.613309"], ["user_id", 15], ["created_at", "2024-05-31 17:16:34.613554"], ["updated_at", "2024-05-31 17:16:34.613554"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.618714"], ["updated_at", "2024-05-31 17:16:34.618714"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.623600"], ["updated_at", "2024-05-31 17:16:34.623600"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.627785"], ["updated_at", "2024-05-31 17:16:34.627785"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.632196"], ["updated_at", "2024-05-31 17:16:34.632196"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.637035"], ["updated_at", "2024-05-31 17:16:34.637035"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:16:34.638082"], ["user_id", 20], ["created_at", "2024-05-31 17:16:34.638407"], ["updated_at", "2024-05-31 17:16:34.638407"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.643150"], ["updated_at", "2024-05-31 17:16:34.643150"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-06-01 16:16:34.643859"], ["user_id", 21], ["created_at", "2024-05-31 17:16:34.644176"], ["updated_at", "2024-05-31 17:16:34.644176"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.7ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:16:34.653668' AND deadline < '2024-06-01 18:16:34.653669')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: b1f6f9b8-7f98-4aae-b2ee-0102b9d8a6b5) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x00000001216b0798 @uri=#<URI::GID gid://taskapp/Task/9>>, "1 Day"]}
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[35mBEGIN[0m
+[ActiveJob] [ActionMailer::MailDeliveryJob] [b1f6f9b8-7f98-4aae-b2ee-0102b9d8a6b5]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 9], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [b1f6f9b8-7f98-4aae-b2ee-0102b9d8a6b5] Error performing ActionMailer::MailDeliveryJob (Job ID: b1f6f9b8-7f98-4aae-b2ee-0102b9d8a6b5) from Async(default) in 2.11ms: ActiveJob::DeserializationError (Error while trying to deserialize arguments: Couldn't find Task with 'id'=9):
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:416:in `raise_record_not_found_exception!'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:522:in `find_one'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:499:in `find_with_ids'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:92:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/querying.rb:23:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/core.rb:246:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:162:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `block in locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `block in unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:929:in `_scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:467:in `scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/scoping/default.rb:51:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:31:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:145:in `deserialize_global_id'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:129:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `block in deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `block in deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `transform_values'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:133:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `block in deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:210:in `deserialize_arguments'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:200:in `deserialize_arguments_if_needed'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:50:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:16:34.661676"], ["updated_at", "2024-05-31 17:16:34.661676"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.6ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 18:15:34.662772"], ["user_id", 22], ["created_at", "2024-05-31 17:16:34.663058"], ["updated_at", "2024-05-31 17:16:34.663058"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:16:34.664424' AND deadline < '2024-05-31 19:16:34.664425')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: c2600e54-8bb3-429e-ae44-e7c31695e6e6) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x000000011f685310 @uri=#<URI::GID gid://taskapp/Task/10>>, "1 Hour"]}
+[ActiveJob] [ActionMailer::MailDeliveryJob] [c2600e54-8bb3-429e-ae44-e7c31695e6e6]   [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 10], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [c2600e54-8bb3-429e-ae44-e7c31695e6e6] Performing ActionMailer::MailDeliveryJob (Job ID: c2600e54-8bb3-429e-ae44-e7c31695e6e6) from Async(default) enqueued at 2024-05-31T17:16:34.665257000Z with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x000000011e934c60 @uri=#<URI::GID gid://taskapp/Task/10>>, "1 Hour"]}
+  [1m[36mTRANSACTION (0.5ms)[0m  [1m[31mROLLBACK[0m
+[ActiveJob] [ActionMailer::MailDeliveryJob] [c2600e54-8bb3-429e-ae44-e7c31695e6e6]   [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 LIMIT $2[0m  [["id", 22], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [c2600e54-8bb3-429e-ae44-e7c31695e6e6] TaskMailer#deadline_alert: processed outbound mail in 58.7ms
+[ActiveJob] [ActionMailer::MailDeliveryJob] [c2600e54-8bb3-429e-ae44-e7c31695e6e6] Error performing ActionMailer::MailDeliveryJob (Job ID: c2600e54-8bb3-429e-ae44-e7c31695e6e6) from Async(default) in 63.08ms: NoMethodError (undefined method `email' for nil):
+/Users/yuvraj/Desktop/TaskManagement/app/mailers/task_mailer.rb:5:in `deadline_alert'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/base.rb:224:in `process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/callbacks.rb:259:in `block in process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actiontext-7.1.3.3/lib/action_text/rendering.rb:23:in `with_renderer'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actiontext-7.1.3.3/lib/action_text/engine.rb:69:in `block (4 levels) in <class:Engine>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/callbacks.rb:258:in `process_action'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionpack-7.1.3.3/lib/abstract_controller/base.rb:160:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:29:in `block in process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:21:in `handle_exceptions'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/rescuable.rb:28:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionview-7.1.3.3/lib/action_view/rendering.rb:40:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/base.rb:658:in `block in process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/base.rb:657:in `process'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:136:in `block in processed_mailer'
+<internal:kernel>:90:in `tap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:135:in `processed_mailer'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/message_delivery.rb:124:in `deliver_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/actionmailer-7.1.3.3/lib/action_mailer/mail_delivery_job.rb:28:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:69:in `block in _perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/i18n-1.14.5/lib/i18n.rb:351:in `with_locale'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/translation.rb:9:in `block (2 levels) in <module:Translation>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/core_ext/time/zones.rb:65:in `use_zone'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/timezones.rb:9:in `block (2 levels) in <module:Timezones>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:68:in `_perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:32:in `_perform_job'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:52:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+  [1m[36mActiveRecord::InternalMetadata Load (1.6ms)[0m  [1m[34mSELECT * FROM "ar_internal_metadata" WHERE "ar_internal_metadata"."key" = $1 ORDER BY "ar_internal_metadata"."key" ASC LIMIT 1[0m  [[nil, "schema_sha1"]]
+  [1m[36mActiveRecord::SchemaMigration Load (0.8ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (1.0ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.7ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.310986"], ["updated_at", "2024-05-31 17:19:17.310986"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#index as HTML
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 23], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/index.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/index.html.erb within layouts/application (Duration: 0.2ms | Allocations: 138)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 321)
+Completed 200 OK in 25ms (Views: 4.5ms | ActiveRecord: 3.2ms | Allocations: 11550)
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.367406"], ["updated_at", "2024-05-31 17:19:17.367406"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (1.1ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17.368463"], ["user_id", 24], ["created_at", "2024-05-31 17:19:17.379553"], ["updated_at", "2024-05-31 17:19:17.379553"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#show as HTML
+  Parameters: {"id"=>"11"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 24], ["LIMIT", 1]]
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 24], ["id", 11], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/show.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/show.html.erb within layouts/application (Duration: 0.2ms | Allocations: 95)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.3ms | Allocations: 249)
+Completed 200 OK in 5ms (Views: 0.6ms | ActiveRecord: 0.5ms | Allocations: 2361)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.4ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.391688"], ["updated_at", "2024-05-31 17:19:17.391688"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#new as HTML
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 25], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/new.html.erb within layouts/application (Duration: 0.1ms | Allocations: 95)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.3ms | Allocations: 249)
+Completed 200 OK in 2ms (Views: 0.5ms | ActiveRecord: 0.2ms | Allocations: 1148)
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.399412"], ["updated_at", "2024-05-31 17:19:17.399412"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17.400352"], ["user_id", 26], ["created_at", "2024-05-31 17:19:17.400734"], ["updated_at", "2024-05-31 17:19:17.400734"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#edit as HTML
+  Parameters: {"id"=>"12"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 26], ["LIMIT", 1]]
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 26], ["id", 12], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 0.2ms | Allocations: 95)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 249)
+Completed 200 OK in 3ms (Views: 0.7ms | ActiveRecord: 0.5ms | Allocations: 1272)
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.419707"], ["updated_at", "2024-05-31 17:19:17.419707"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (2.4ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"deadline"=>"2024-05-31 22:49:17 +0530", "description"=>"Test description", "state"=>"Backlog", "title"=>"Test Task"}}
+  [1m[36mUser Load (0.3ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 27], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17"], ["user_id", 27], ["created_at", "2024-05-31 17:19:17.432600"], ["updated_at", "2024-05-31 17:19:17.432600"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/tasks/13
+Completed 302 Found in 5ms (ActiveRecord: 1.4ms | Allocations: 1458)
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.439297"], ["updated_at", "2024-05-31 17:19:17.439297"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Processing by TasksController#create as HTML
+  Parameters: {"task"=>{"deadline"=>"2024-05-31 22:49:17 +0530", "description"=>"Test description", "state"=>"Backlog", "title"=>""}}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 28], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/new.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/new.html.erb within layouts/application (Duration: 0.2ms | Allocations: 94)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.4ms | Allocations: 248)
+Completed 200 OK in 2ms (Views: 0.7ms | ActiveRecord: 0.2ms | Allocations: 1355)
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.6ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.448637"], ["updated_at", "2024-05-31 17:19:17.448637"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.5ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17.449669"], ["user_id", 29], ["created_at", "2024-05-31 17:19:17.450202"], ["updated_at", "2024-05-31 17:19:17.450202"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>"New Title"}, "id"=>"14"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 29], ["LIMIT", 1]]
+  [1m[36mTask Load (0.3ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 29], ["id", 14], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Update (0.4ms)[0m  [1m[33mUPDATE "tasks" SET "title" = $1, "updated_at" = $2 WHERE "tasks"."id" = $3[0m  [["title", "New Title"], ["updated_at", "2024-05-31 17:19:17.454216"], ["id", 14]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/tasks/14
+Completed 302 Found in 3ms (ActiveRecord: 1.0ms | Allocations: 1351)
+  [1m[36mTask Load (0.1ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 14], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.3ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.460784"], ["updated_at", "2024-05-31 17:19:17.460784"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.7ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17.461600"], ["user_id", 30], ["created_at", "2024-05-31 17:19:17.461840"], ["updated_at", "2024-05-31 17:19:17.461840"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Processing by TasksController#update as HTML
+  Parameters: {"task"=>{"title"=>""}, "id"=>"15"}
+  [1m[36mUser Load (0.2ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 30], ["LIMIT", 1]]
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 30], ["id", 15], ["LIMIT", 1]]
+  Rendering layout layouts/application.html.erb
+  Rendering tasks/edit.html.erb within layouts/application
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered tasks/edit.html.erb within layouts/application (Duration: 0.2ms | Allocations: 94)
+  Template rendering was prevented by rspec-rails. Use `render_views` to verify rendered view contents if necessary.
+  Rendered layout layouts/application.html.erb (Duration: 0.5ms | Allocations: 248)
+Completed 200 OK in 3ms (Views: 0.8ms | ActiveRecord: 0.4ms | Allocations: 1384)
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 15], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.4ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.471757"], ["updated_at", "2024-05-31 17:19:17.471757"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 17:19:17.472662"], ["user_id", 31], ["created_at", "2024-05-31 17:19:17.472934"], ["updated_at", "2024-05-31 17:19:17.472934"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Count (0.3ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+Processing by TasksController#destroy as HTML
+  Parameters: {"id"=>"16"}
+  [1m[36mUser Load (0.1ms)[0m  [1m[34mSELECT "users".* FROM "users" WHERE "users"."id" = $1 ORDER BY "users"."id" ASC LIMIT $2[0m  [["id", 31], ["LIMIT", 1]]
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."user_id" = $1 AND "tasks"."id" = $2 LIMIT $3[0m  [["user_id", 31], ["id", 16], ["LIMIT", 1]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Destroy (0.3ms)[0m  [1m[31mDELETE FROM "tasks" WHERE "tasks"."id" = $1[0m  [["id", 16]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+Redirected to http://test.host/tasks
+Completed 302 Found in 3ms (ActiveRecord: 0.8ms | Allocations: 1080)
+  [1m[36mTask Count (0.2ms)[0m  [1m[34mSELECT COUNT(*) FROM "tasks"[0m
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.3ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.7ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.3ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.482546"], ["updated_at", "2024-05-31 17:19:17.482546"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.4ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-06-01 16:19:17.483549"], ["user_id", 32], ["created_at", "2024-05-31 17:19:17.483974"], ["updated_at", "2024-05-31 17:19:17.483974"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.4ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:19:17.492793' AND deadline < '2024-06-01 18:19:17.492794')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: 9efd84f5-faad-4a60-905f-baec9669f7d4) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x000000014fb720c8 @uri=#<URI::GID gid://taskapp/Task/17>>, "1 Day"]}
+  [1m[36mTRANSACTION (0.4ms)[0m  [1m[31mROLLBACK[0m
+  [1m[36mTRANSACTION (1.0ms)[0m  [1m[35mBEGIN[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mUser Exists? (0.5ms)[0m  [1m[34mSELECT 1 AS one FROM "users" WHERE "users"."email" = $1 LIMIT $2[0m  [["email", "test@example.com"], ["LIMIT", 1]]
+  [1m[36mUser Create (0.2ms)[0m  [1m[32mINSERT INTO "users" ("email", "encrypted_password", "reset_password_token", "reset_password_sent_at", "remember_created_at", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["email", "test@example.com"], ["encrypted_password", "[FILTERED]"], ["reset_password_token", "[FILTERED]"], ["reset_password_sent_at", "[FILTERED]"], ["remember_created_at", nil], ["created_at", "2024-05-31 17:19:17.499968"], ["updated_at", "2024-05-31 17:19:17.499968"]]
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTRANSACTION (0.1ms)[0m  [1m[35mSAVEPOINT active_record_1[0m
+  [1m[36mTask Create (0.8ms)[0m  [1m[32mINSERT INTO "tasks" ("title", "description", "state", "deadline", "user_id", "created_at", "updated_at") VALUES ($1, $2, $3, $4, $5, $6, $7) RETURNING "id"[0m  [["title", "Test Task"], ["description", "Test description"], ["state", "Backlog"], ["deadline", "2024-05-31 18:18:17.500883"], ["user_id", 33], ["created_at", "2024-05-31 17:19:17.501190"], ["updated_at", "2024-05-31 17:19:17.501190"]]
+  [1m[36mTRANSACTION (0.2ms)[0m  [1m[35mRELEASE SAVEPOINT active_record_1[0m
+  [1m[36mTask Load (0.2ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE (deadline >= '2024-05-31 17:19:17.503085' AND deadline < '2024-05-31 19:19:17.503086')[0m
+[ActiveJob] Enqueued ActionMailer::MailDeliveryJob (Job ID: fc63b309-b76d-460b-be18-76f722097926) to Async(default) with arguments: "TaskMailer", "deadline_alert", "deliver_now", {:args=>[#<GlobalID:0x000000014f3dcac0 @uri=#<URI::GID gid://taskapp/Task/18>>, "1 Hour"]}
+  [1m[36mTRANSACTION (0.6ms)[0m  [1m[31mROLLBACK[0m
+[ActiveJob] [ActionMailer::MailDeliveryJob] [fc63b309-b76d-460b-be18-76f722097926]   [1m[36mTask Load (0.6ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 18], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [fc63b309-b76d-460b-be18-76f722097926] Error performing ActionMailer::MailDeliveryJob (Job ID: fc63b309-b76d-460b-be18-76f722097926) from Async(default) in 1.5ms: ActiveJob::DeserializationError (Error while trying to deserialize arguments: Couldn't find Task with 'id'=18):
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:416:in `raise_record_not_found_exception!'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:522:in `find_one'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:499:in `find_with_ids'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:92:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/querying.rb:23:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/core.rb:246:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:162:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `block in locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `block in unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:929:in `_scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:467:in `scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/scoping/default.rb:51:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:31:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:145:in `deserialize_global_id'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:129:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `block in deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `block in deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `transform_values'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:133:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `block in deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:210:in `deserialize_arguments'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:200:in `deserialize_arguments_if_needed'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:50:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
+[ActiveJob] [ActionMailer::MailDeliveryJob] [9efd84f5-faad-4a60-905f-baec9669f7d4]   [1m[36mTask Load (0.9ms)[0m  [1m[34mSELECT "tasks".* FROM "tasks" WHERE "tasks"."id" = $1 LIMIT $2[0m  [["id", 17], ["LIMIT", 1]]
+[ActiveJob] [ActionMailer::MailDeliveryJob] [9efd84f5-faad-4a60-905f-baec9669f7d4] Error performing ActionMailer::MailDeliveryJob (Job ID: 9efd84f5-faad-4a60-905f-baec9669f7d4) from Async(default) in 66.33ms: ActiveJob::DeserializationError (Error while trying to deserialize arguments: Couldn't find Task with 'id'=17):
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:416:in `raise_record_not_found_exception!'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:522:in `find_one'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:499:in `find_with_ids'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation/finder_methods.rb:92:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/querying.rb:23:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/core.rb:246:in `find'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:162:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `block in locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `block in unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:929:in `_scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/relation.rb:467:in `scoping'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/scoping/default.rb:51:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:220:in `unscoped'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:210:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/globalid-1.2.1/lib/global_id/locator.rb:31:in `locate'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:145:in `deserialize_global_id'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:129:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `block in deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:126:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `block in deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `transform_values'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:159:in `deserialize_hash'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:133:in `deserialize_argument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `block in deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `map'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/arguments.rb:43:in `deserialize'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:210:in `deserialize_arguments'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/core.rb:200:in `deserialize_arguments_if_needed'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:50:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:13:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:40:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `block in instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications/instrumenter.rb:58:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/notifications.rb:206:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:39:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activerecord-7.1.3.3/lib/active_record/railties/job_runtime.rb:11:in `instrument'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/instrumentation.rb:26:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `block in perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `block in tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:39:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/tagged_logging.rb:135:in `tagged'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/broadcast_logger.rb:240:in `method_missing'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:25:in `tag_logger'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/logging.rb:18:in `perform_now'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:30:in `block in execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:121:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:67:in `block (4 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:77:in `block in wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/execution_wrapper.rb:92:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/reloader.rb:74:in `wrap'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/railtie.rb:66:in `block (3 levels) in <class:Railtie>'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `instance_exec'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:130:in `block in run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activesupport-7.1.3.3/lib/active_support/callbacks.rb:141:in `run_callbacks'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/execution.rb:28:in `execute'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/activejob-7.1.3.3/lib/active_job/queue_adapters/async_adapter.rb:70:in `perform'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:359:in `run_task'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:350:in `block (3 levels) in create_worker'
+<internal:kernel>:187:in `loop'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:341:in `block (2 levels) in create_worker'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `catch'
+/Users/yuvraj/.bundle/ruby/3.3.0/gems/concurrent-ruby-1.3.1/lib/concurrent-ruby/concurrent/executor/ruby_thread_pool_executor.rb:340:in `block in create_worker'
