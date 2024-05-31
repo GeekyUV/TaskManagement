@@ -1,0 +1,107 @@
+body {
+    background: url('https://res.cloudinary.com/imagist/image/fetch/q_auto,f_auto,c_scale,w_2624/https%3A%2F%2Ftodoist.com%2F_next%2Fstatic%2Fimages%2Fbackground-illustration_31391123ca7b512e5c7a8dce6195b0b3.png') no-repeat center center fixed;
+    background-size: cover;
+}
+
+.container {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: rgba(255, 255, 255, 0.8); /* Adding opacity to make content readable */
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+}
+
+.top-right {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+tr:hover {
+    background-color: #ddd;
+}
+
+.actions {
+    text-align: center;
+}
+
+.action-button {
+    display: inline-block;
+    padding: 8px 12px;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.show-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+td .show-button:hover {
+    background-color: #2980b9;
+}
+
+.action-button.editback-button {
+    background-color: #3498db;
+    color: #fff;
+}
+
+td.actions .action-button.editback-button:hover {
+    background-color: #2980b9;
+}
+
+
+
+.edit-button {
+    background-color: #f39c12;
+    color: #fff;
+}
+
+.edit-button:hover {
+    background-color: #e08e0b;
+}
+
+.destroy-button {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.destroy-button:hover {
+    background-color: #c44131;
+}
+
+
+
+
+
+
+
+

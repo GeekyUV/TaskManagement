@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Task Details</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', 'tasks', media: 'all' %>
+</head>
+<body>
+
+<div class="container">
+  <h1>Task Details</h1>
+
+  <p><strong>Title:</strong> <%= @task.title %></p>
+  <p><strong>Description:</strong> <%= @task.description %></p>
+  <p><strong>State:</strong> <%= @task.state %></p>
+  <p><strong>Deadline:</strong> <%= @task.deadline.in_time_zone('New Delhi').strftime('%Y-%m-%d %H:%M:%S %Z') %></p>
+
+
+  <tr>
+    <td><%= link_to 'Edit', edit_task_path(@task), class: 'action-button editback-button' %></td>
+    <td><%= link_to 'Back', tasks_path, class: 'action-button editback-button' %></td>
+  </tr>
+
+
+</div>
+
+</body>
+</html>

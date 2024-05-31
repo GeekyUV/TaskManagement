@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Your Tasks</title>
+  <%= csrf_meta_tags %>
+  <%= csp_meta_tag %>
+  <%= stylesheet_link_tag 'application', 'tasks', media: 'all' %>
+  <style>
+
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="top-right">
+    <%= link_to "Logout", logout_path, method: :delete, data: { confirm: 'Are you sure you want to log out?' } %>
+  </div>
+
+  <h1>Your Tasks</h1>
+  <%= link_to 'New Task', new_task_path %>
+
+  <table>
+    <thead>
+    <tr>
+      <th>Title</th>
+      <th>Description</th>
+      <th>State</th>
+      <th>Deadline</th>
+      <th colspan="3">Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% @tasks.each do |task| %>
+      <tr>
+        <td><%= task.title %></td>
+        <td><%= task.description %></td>
+        <td><%= task.state %></td>
+        <td><%= task.deadline.in_time_zone('New Delhi').strftime('%Y-%m-%d %H:%M:%S %Z') %></td>
+        <td class="actions"><%= link_to 'Show', task, class: 'action-button show-button' %></td>
+        <td class="actions"><%= link_to 'Edit', edit_task_path(task), class: 'action-button edit-button' %></td>
+        <td class="actions">
+          <%= button_to 'Delete', task_path(task), method: :delete, data: { confirm: 'Are you sure?' }, class: 'action-button destroy-button' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>
+
+</body>
+</html>

@@ -1,0 +1,13 @@
+<div class="container">
+  <h1>New Task</h1>
+
+  <div class="form-container">
+    <%= render 'form', task: @task %>
+  </div>
+
+  <div style="margin-top: 20px;">
+    <%= link_to 'Back', tasks_path, class: 'action-button editback-button' %>
+  </div>
+
+</div>
+
